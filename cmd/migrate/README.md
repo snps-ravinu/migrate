@@ -7,13 +7,13 @@
 [Release Downloads](https://github.com/golang-migrate/migrate/releases)
 
 ```bash
-$ curl -L https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$os-$arch.tar.gz | tar xvz
+curl -L https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$os-$arch.tar.gz | tar xvz
 ```
 
 ### MacOS
 
 ```bash
-$ brew install golang-migrate
+brew install golang-migrate
 ```
 
 ### Windows
@@ -21,16 +21,16 @@ $ brew install golang-migrate
 Using [scoop](https://scoop.sh/)
 
 ```bash
-$ scoop install migrate
+scoop install migrate
 ```
 
 ### Linux (*.deb package)
 
 ```bash
-$ curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | apt-key add -
-$ echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/migrate.list
-$ apt-get update
-$ apt-get install -y migrate
+curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | apt-key add -
+echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/migrate.list
+apt-get update
+apt-get install -y migrate
 ```
 
 ### With Go toolchain
@@ -38,22 +38,22 @@ $ apt-get install -y migrate
 #### Versioned
 
 ```bash
-$ go get -u -d github.com/golang-migrate/migrate/cmd/migrate
-$ cd $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate
-$ git checkout $TAG  # e.g. v4.1.0
-$ # Go 1.15 and below
-$ go build -tags 'postgres' -ldflags="-X main.Version=$(git describe --tags)" -o $GOPATH/bin/migrate $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate
-$ # Go 1.16+
-$ go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@$TAG
+go get -u -d github.com/golang-migrate/migrate/cmd/migrate
+cd $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate
+git checkout $TAG  # e.g. v4.1.0
+# Go 1.15 and below
+go build -tags 'postgres' -ldflags="-X main.Version=$(git describe --tags)" -o $GOPATH/bin/migrate $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate
+# Go 1.16+
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@$TAG
 ```
 
 #### Unversioned
 
 ```bash
-$ # Go 1.15 and below
-$ go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate
-$ # Go 1.16+
-$ go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+# Go 1.15 and below
+go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate
+# Go 1.16+
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 ```
 
 #### Notes
@@ -71,7 +71,7 @@ correspond to the names of the sub-packages underneath the
 ## Usage
 
 ```bash
-$ migrate -help
+migrate -help
 Usage: migrate OPTIONS COMMAND [arg...]
        migrate [ -version | -help ]
 
@@ -119,7 +119,7 @@ Send SIGKILL for immediate halt.
 ### ENV variables
 
 ```bash
-$ migrate -database "$MY_MIGRATE_DATABASE"
+migrate -database "$MY_MIGRATE_DATABASE"
 ```
 
 ### JSON files
@@ -127,12 +127,12 @@ $ migrate -database "$MY_MIGRATE_DATABASE"
 Check out https://stedolan.github.io/jq/
 
 ```bash
-$ migrate -database "$(cat config.json | jq -r '.database')"
+migrate -database "$(cat config.json | jq -r '.database')"
 ```
 
 ### YAML files
 
 ```bash
-$ migrate -database "$(cat config/database.yml | ruby -ryaml -e "print YAML.load(STDIN.read)['database']")"
-$ migrate -database "$(cat config/database.yml | python -c 'import yaml,sys;print yaml.safe_load(sys.stdin)["database"]')"
+migrate -database "$(cat config/database.yml | ruby -ryaml -e "print YAML.load(STDIN.read)['database']")"
+migrate -database "$(cat config/database.yml | python -c 'import yaml,sys;print yaml.safe_load(sys.stdin)["database"]')"
 ```
